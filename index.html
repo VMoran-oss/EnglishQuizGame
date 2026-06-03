@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Quiz Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone">
+
+    <div id="welcome-screen">
+        <h1>QUIZ</h1>
+
+        <p>Welcome to the English Quiz Game!</p>
+
+        <button onclick="showInstructions()">
+            START
+        </button>
+    </div>
+
+    <div id="instructions-screen" style="display:none;">
+        <h2>Instructions</h2>
+
+        <p>1. Read each question carefully.</p>
+        <p>2. Select one answer.</p>
+        <p>3. Each correct answer gives 1 point.</p>
+        <p>4. Your final score will be displayed.</p>
+
+        <button onclick="startQuiz()">
+            Start Quiz
+        </button>
+    </div>
+
+    <div id="quiz-screen" style="display:none;">
+
+        <h3 id="question-number"></h3>
+
+        <div class="question-box">
+            <p id="question"></p>
+        </div>
+
+        <div id="answers"></div>
+
+        <button onclick="nextQuestion()">
+            NEXT
+        </button>
+
+    </div>
+
+    <div id="result-screen" style="display:none;">
+        <h2>Quiz Finished!</h2>
+
+        <h3 id="final-score"></h3>
+
+        <p id="message"></p>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
