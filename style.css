@@ -52,4 +52,74 @@ button{
     border-radius:10px;
     cursor:pointer;
     font-size:18px;
+    transition: all 0.3s ease;
+}
+.option:hover {
+
+    transform: scale(1.05);
+
+}
+
+/*Animación al aparecer una pregunta*/
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.question-box {
+
+    animation: fadeIn 0.5s ease;
+}
+
+/*Efecto de sacudida cuando le den a la respuesta incorrecta*/
+@keyframes shake {
+
+    0% { transform: translateX(0); }
+
+    25% { transform: translateX(-5px); }
+
+    50% { transform: translateX(5px); }
+
+    75% { transform: translateX(-5px); }
+
+    100% { transform: translateX(0); }
+
+}
+
+.wrong {
+
+    animation: shake 0.4s;
+}
+
+/*Estilos para la parte del monstruo persiguiendo*/
+
+#virus-game{
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+#runner{
+    position: absolute;
+    left: 20px;
+    font-size: 50px;
+}
+
+#virus{
+
+    position: absolute;
+    right: 20px;
+    font-size: 50px;
+    transition: transform 0.7s ease;
+
 }

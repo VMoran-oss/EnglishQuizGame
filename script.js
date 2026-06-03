@@ -1,41 +1,51 @@
 const questions = [
 
     {
-        question: "What is the capital of France?", options: ["Paris", "Madrid", "Rome", "Berlin"], answer: "Paris"
+        question: "What does Bug mean in programming?",
+        options: ["A software error", "A computer virus", "A keyboard shortcut", "A database"],
+        answer: "A software error"
     },
 
     {
-        question: "What color is the sky?", options: ["Green", "Blue", "Red", "Yellow"], answer: "Blue"
+        question: "What does Compiler do?",
+        options: ["Stores data", "Converts code into executable form", "Creates databases", "Designs interfaces"],
+        answer: "Converts code into executable form"
     },
 
     {
-        question: "What animal says meow?", options: ["Dog", "Cat", "Horse", "Bird"], answer: "Cat"
+        question: "What is an Object?",
+        options: ["A compiler", "An instance of a class", "A variable type", "A comment"],
+        answer: "An instance of a class"
     },
 
     {
-        question: "What is 5 + 5?", options: ["8", "10", "12", "15"], answer: "10"
+        question: "What does Database mean?",
+        options: ["A collection of organized data", "A programming language", "web browser", "A function"],
+        answer: "A collection of organized data"
     },
 
     {
-        question: "What color is grass?", options: ["Blue", "Green", "Red", "Black"], answer: "Green"
+        question: "Which of the following is NOT a programming language??", options: ["Python", "Java", "HTML", "C++"], answer: "HTML"
     },
 
     {
-        question: "What do bees make?", options: ["Milk", "Honey", "Water", "Juice"], answer: "Honey"
+        question: "In CSS, what property is used to change the background color of an element?", options: ["Color", "Front-color", "background-color", "border-color"],
+        answer: "background-color"
     },
 
     {
-        question: "What is the opposite of hot?", options: ["Cold", "Tall", "Fast", "Big"], answer: "Cold"
+        question: "What function does a \"Comment\" serve in the code?", options: ["It makes the program run faster", "Explain the code", "Shows a message", "Connect the code to the internet."], answer: "Explain the code"
     },
 
     {
-        question: "What day comes after Monday?",
-        options: ["Sunday", "Tuesday", "Friday", "Saturday"],
-        answer: "Tuesday"
+        question: "What does the acronym CSS stand for??",
+        options: ["Computer Style Sheets", "Creative Style Systems", "Cascading Style Sheets", "Complex Style Syntax"],
+        answer: "Cascading Style Sheets"
     },
 
     {
-        question: "What is 10 - 2?", options: ["6", "7", "8", "9"], answer: "8"
+        question: "What is Github?", options: ["A programming language for apps", "A cloud-based platform for storing, organizing, and sharing source code.", "A type of computer virus", "A text editor for writing fast code."],
+        answer: "A cloud-based platform for storing, organizing, and sharing source code."
     },
 
     {
@@ -66,6 +76,18 @@ const questions = [
 let currentQuestion = 0;
 let score = 0;
 let selectedAnswer = "";
+let answered = false;
+//Variables de errores
+let mistakes = 0;
+let virusPosition = 0;
+const maxMistakes = 15;
+
+//Sonidos para respuesras malas y correctas
+const correctSound =
+    new Audio("sounds/correct.mp3.mp3");
+
+const wrongSound =
+    new Audio("sounds/wrong.mp3.mp3");
 
 //Mostrar las instrucciones
 function showInstructions() {
@@ -101,27 +123,86 @@ function showQuestion() {
 
     answersDiv.innerHTML = "";
 
-    q.options.forEach(option => {
+    q.options.forEach((option, index) => {
 
         let button = document.createElement("button");
 
         button.className = "option";
 
-        button.innerHTML = option;
+        const letters = ["A", "B", "C", "D"];
+
+        button.innerHTML = "<strong>" +
+            letters[index] + ")</strong> " + option;
+
+        button.dataset.answer = option;
 
         button.onclick = function () {
 
-            // Quitar selección anterior
-            let options = document.querySelectorAll(".option");
+            if (answered) {
+                return;
+            }
 
-            options.forEach(btn => {
-                btn.style.border = "none";
-            });
-
-            // Marcar la seleccionada
-            button.style.border = "3px solid green";
+            answered = true;
 
             selectedAnswer = option;
+
+            let correctAnswer =
+                questions[currentQuestion].answer;
+
+            if (option === correctAnswer) {
+
+                button.style.backgroundColor =
+                    "green";
+
+                button.style.color =
+                    "white";
+
+                //Agregar sonido
+                correctSound.currentTime = 0;
+                correctSound.play();
+
+                score++;
+
+            } else {
+
+                button.style.backgroundColor =
+                    "red";
+                button.classList.add("wrong");
+
+                button.style.color =
+                    "white";
+
+                moveVirus();
+
+                wrongSound.currentTime = 0;
+                wrongSound.play();
+
+                // Mostrar cuál era la correcta
+                let buttons =
+                    document.querySelectorAll(".option");
+
+                buttons.forEach(btn => {
+
+                    if (btn.dataset.answer  === correctAnswer) {
+
+                        btn.style.backgroundColor =
+                            "green";
+
+                        btn.style.color =
+                            "white";
+                    }
+
+                });
+
+            }
+            //Desactivar todas las opciones despues de contestar
+            let buttons =
+                document.querySelectorAll(".option");
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+            });
+
         };
 
         answersDiv.appendChild(button);
@@ -130,14 +211,22 @@ function showQuestion() {
 }
 
 //Validar respuestas
-function nextQuestion(){
+function nextQuestion() {
+    if (!answered) {
 
-    if(selectedAnswer === ""){
+        alert(
+            "Please select an answer first."
+        );
+
+        return;
+    }
+
+    if (selectedAnswer === "") {
         alert("Please select an answer.");
         return;
     }
 
-    if(selectedAnswer === questions[currentQuestion].answer){
+    if (selectedAnswer === questions[currentQuestion].answer) {
         score++;
     }
 
@@ -145,11 +234,34 @@ function nextQuestion(){
 
     currentQuestion++;
 
-    if(currentQuestion < questions.length){
+    if (currentQuestion < questions.length) {
+        answered = false;
         showQuestion();
-    }else{
+    } else {
         showResult();
     }
+}
+
+/*Funciones para mover el virus*/
+
+function moveVirus(){
+
+    mistakes++;
+
+    virusPosition += 200;
+
+    document.getElementById("virus").style.transform =
+        `translateX(-${virusPosition}px)`;
+
+    console.log("Mistakes:", mistakes);
+    console.log("Virus Position:", virusPosition);
+
+    if(mistakes >= maxMistakes){
+
+        showVirusGameOver();
+
+    }
+
 }
 
 //Pantalla final del juego
@@ -179,4 +291,30 @@ function showResult() {
 
     document.getElementById("message").innerHTML = msg;
 
+}
+
+//Función del GameOver para el juego
+function showVirusGameOver(){
+
+    clearInterval(timer);
+
+    document.getElementById(
+        "quiz-screen"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "result-screen"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "final-score"
+    ).innerHTML =
+        "💀 SYSTEM INFECTED";
+
+    document.getElementById(
+        "message"
+    ).innerHTML =
+        "The virus reached the programmer!";
 }
