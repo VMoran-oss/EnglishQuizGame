@@ -48,7 +48,7 @@ const questions = [
     },
 
     {
-        question: "What is String in Programming?", options: ["A data type used to represent text", "", "Blue", "Green"], answer: "A data type used to represent text"
+        question: "What is String in Programming?", options: ["A data type used to represent text", "", "Blue", "Green"], answer: "Yellow"
     },
 
     {
@@ -224,6 +224,7 @@ function nextQuestion() {
         return;
     }
 
+
     selectedAnswer = "";
 
     currentQuestion++;
@@ -257,31 +258,6 @@ function moveVirus(){
 
 }
 
-//Función del GameOver para el juego
-function showVirusGameOver(){
-
-
-    document.getElementById(
-        "quiz-screen"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "result-screen"
-    ).style.display =
-        "block";
-
-    document.getElementById(
-        "final-score"
-    ).innerHTML =
-        "💀 SYSTEM INFECTED";
-
-    document.getElementById(
-        "message"
-    ).innerHTML =
-        "The virus reached the programmer!";
-}
-
 //Pantalla final del juego
 function showResult() {
 
@@ -309,4 +285,30 @@ function showResult() {
 
     document.getElementById("message").innerHTML = msg;
 
+}
+
+//Función del GameOver para el juego
+function showVirusGameOver(){
+
+    clearInterval(timer);
+
+    document.getElementById(
+        "quiz-screen"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "result-screen"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "final-score"
+    ).innerHTML =
+        "💀 SYSTEM INFECTED";
+
+    document.getElementById(
+        "message"
+    ).innerHTML =
+        "The virus reached the programmer!";
 }

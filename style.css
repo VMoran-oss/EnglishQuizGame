@@ -140,3 +140,58 @@ button:hover {
     font-size: 50px;
     transition: all 0.7s ease;
 }
+/* --- EFECTOS DE VICTORIA --- */
+
+/* Por defecto ocultamos los efectos */
+.hidden {
+    display: none;
+}
+
+/* Animación para que la copa flote */
+.trophy {
+    font-size: 80px;
+    margin-bottom: 10px;
+    animation: flotar 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 15px #ffcc00); /* Brillo dorado */
+}
+
+@keyframes flotar {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-15px); }
+}
+
+/* --- EL CONFETI --- */
+.confetti-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: visible;
+}
+
+.confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: -20px;
+    border-radius: 3px;
+    animation: caerConfeti 3s linear infinite;
+}
+
+/* Colores brillantes de los pedacitos de confeti */
+.c1 { background: #00ff66; left: 20%; animation-delay: 0s; }
+.c2 { background: #ff3333; left: 40%; animation-delay: 0.5s; }
+.c3 { background: #ffcc00; left: 60%; animation-delay: 1.2s; }
+.c4 { background: #33ccff; left: 80%; animation-delay: 0.2s; }
+.c5 { background: #ff00ff; left: 50%; animation-delay: 0.8s; }
+
+/* Animación de caída y rotación */
+@keyframes caerConfeti {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(300px) rotate(720deg);
+        opacity: 0;
+    }
+}
