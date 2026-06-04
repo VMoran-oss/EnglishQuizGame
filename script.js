@@ -1,7 +1,7 @@
 const questions = [
 
     {
-        question: "What does Bug mean in programming?",
+        question: "What does \"Bug\" mean in programming?",
         options: ["A software error", "A computer virus", "A keyboard shortcut", "A database"],
         answer: "A software error"
     },
@@ -48,27 +48,28 @@ const questions = [
     },
 
     {
-        question: "What is String in Programming?", options: ["A data type used to represent text", "", "Blue", "Green"], answer: "Yellow"
+        question: "What is String in Programming?", options: ["A data type used to represent text", "a virus", "an argument", " A data type that represents whole numbers "], answer: "A data type used to represent text"
     },
 
     {
-        question: "What animal barks?", options: ["Cat", "Dog", "Fish", "Bird"], answer: "Dog"
+        question: "What is a \"Back up\"?", options: ["Process of creating a copy of the data or code to protect it.", "Process of monitoring and evaluating", "Go back", "Reset data"],
+        answer: "Process of creating a copy of the data or code to protect it."
     },
 
     {
-        question: "Where do fish live?", options: ["Water", "Tree", "Road", "House"], answer: "Water"
+        question: "What are the correct Hardware components?", options: ["Programs, Browsers", "Door, window and desk", "Visual Code, SQL, Java", "Screens, hard drives, processors"], answer: "Screens, hard drives, processors"
     },
 
     {
-        question: "How many days are in a week?", options: ["5", "6", "7", "8"], answer: "7"
+        question: "What are the correct Software components?", options: ["Screens, hard drives, processors", "bookstores, mouse", "Programs, Browsers, Apps", "Computer, projector, code"], answer: "Programs, Browsers, Apps"
     },
 
     {
-        question: "What season comes after spring?", options: ["Summer", "Winter", "Autumn", "Rain"], answer: "Summer"
+        question: "What is CPU?", options: ["It is the main electronic component of a computer", "It's personal computer care", "Part of a program", "A syntax error"], answer: "It is the main electronic component of a computer"
     },
 
     {
-        question: "What do you drink when thirsty?", options: ["Coffee", "Tea", "Water", "Milk"], answer: "Water"
+        question: "What does a Software developer do??", options: ["Build big houses", "Design, create, test and maintain programs, applications and code", "Reply to messages", "Composer"], answer: "Design, create, test and maintain programs, applications and code"
     }];
 
 //Variables del juego
@@ -290,7 +291,6 @@ function showResult() {
 //Función del GameOver para el juego
 function showVirusGameOver(){
 
-    clearInterval(timer);
 
     document.getElementById(
         "quiz-screen"
