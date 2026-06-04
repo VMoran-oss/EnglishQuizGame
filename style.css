@@ -1,125 +1,118 @@
-body{
-    margin:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    background:#f4f4f4;
-    font-family:Arial, sans-serif;
+/* --- CONFIGURACIÓN DEL FONDO GENERAL --- */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #050505; /* Fondo casi negro para dar ambiente hacker */
+    font-family: 'Courier New', Courier, monospace; /* Fuente de terminal de comandos */
+    overflow: hidden;
 }
 
-.phone{
-        width:80%;
-        max-width:800px;
-        min-height:600px;
-        background:#1ea5ff;
-        border-radius:20px;
-        padding:20px;
-        text-align:center;
-        box-shadow:0 0 15px gray;
-    }
-
-h1,h2,h3{
-    color:white;
+/* --- LA PANTALLA INFECTADA (Antes .phone) --- */
+.phone {
+    width: 90%;
+    max-width: 450px; /* Reducido para que parezca más un celular real */
+    min-height: 600px;
+    background: #0d0d0d; /* Fondo interno negro profundo */
+    border: 2px solid #ff3333; /* Borde rojo de advertencia */
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    /* Sombra con brillo neón rojo que parpadea gracias a la animación */
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+    animation: brilloAlerta 2s infinite alternate;
 }
 
-.question-box{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    margin:20px auto;
-    width:80%;
-    font-size:20px;
-
+/* --- TÍTULOS Y TEXTOS DE ALERTA --- */
+h1 {
+    color: #ff3333; /* Rojo brillante para el título principal */
+    font-size: 45px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px #ff3333;
+    letter-spacing: 5px;
 }
 
-button{
-    width:150px;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    margin-top:15px;
+h2, h3 {
+    color: #ffcc00; /* Amarillo de advertencia para instrucciones y preguntas */
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
 }
 
-.option{
-    display:block;
-    width:80%;
-    background:white;
-    margin:10px auto;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:18px;
+p {
+    color: #00ff66; /* Verde "Matrix" para los textos informativos */
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* --- CAJA DE LA PREGUNTA --- */
+.question-box {
+    background: #1a1a1a; /* Fondo gris oscuro translúcido */
+    border: 1px dashed #ffcc00; /* Borde punteado amarillo */
+    padding: 20px;
+    border-radius: 12px;
+    margin: 25px auto;
+    width: 90%;
+}
+
+.question-box p {
+    color: #ffffff; /* Texto de la pregunta en blanco para que resalte */
+    font-size: 18px;
+    margin: 0;
+}
+
+/* --- BOTONES DE ACCIÓN (START, NEXT, etc.) --- */
+button {
+    width: 180px;
+    padding: 12px;
+    background: #ff3333; /* Botón rojo de emergencia */
+    color: white;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
     transition: all 0.3s ease;
 }
+
+button:hover {
+    background: #cc0000;
+    box-shadow: 0 0 20px #ff3333;
+    transform: scale(1.05); /* Se hace un poquito más grande al pasar el mouse */
+}
+
+/* --- BOTONES DE LAS RESPUESTAS (Opciones dinámicas) --- */
+.option {
+    display: block;
+    width: 90%;
+    background: #222222; /* Fondo oscuro para las opciones */
+    color: #00ff66; /* Texto verde hacker */
+    border: 1px solid #00ff66; /* Borde verde */
+    margin: 12px auto;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
 .option:hover {
-
-    transform: scale(1.05);
-
+    background: #00ff66; /* Se vuelve verde al pasar el mouse */
+    color: #000000; /* Texto negro para contraste */
+    box-shadow: 0 0 15px #00ff66;
 }
 
-/*Animación al aparecer una pregunta*/
-@keyframes fadeIn {
-
+/* --- ANIMACIÓN DE PARPADEO DE LA ALERTA --- */
+@keyframes brilloAlerta {
     from {
-        opacity: 0;
-        transform: translateY(20px);
+        box-shadow: 0 0 15px rgba(255, 51, 51, 0.4);
+        border-color: #cc0000;
     }
-
     to {
-        opacity: 1;
-        transform: translateY(0);
+        box-shadow: 0 0 30px rgba(255, 51, 51, 0.8);
+        border-color: #ff3333;
     }
-
-}
-
-.question-box {
-
-    animation: fadeIn 0.5s ease;
-}
-
-/*Efecto de sacudida cuando le den a la respuesta incorrecta*/
-@keyframes shake {
-
-    0% { transform: translateX(0); }
-
-    25% { transform: translateX(-5px); }
-
-    50% { transform: translateX(5px); }
-
-    75% { transform: translateX(-5px); }
-
-    100% { transform: translateX(0); }
-
-}
-
-.wrong {
-
-    animation: shake 0.4s;
-}
-
-/*Estilos para la parte del monstruo persiguiendo*/
-
-#virus-game{
-    position: relative;
-    width: 100%;
-    height: 80px;
-    margin-bottom: 20px;
-}
-
-#runner{
-    position: absolute;
-    left: 20px;
-    font-size: 50px;
-}
-
-#virus{
-
-    position: absolute;
-    right: 20px;
-    font-size: 50px;
-    transition: transform 0.7s ease;
-
 }
