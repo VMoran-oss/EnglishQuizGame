@@ -38,8 +38,7 @@ const questions = [
     },
 
     {
-        question: "What does the acronym CSS stand for??",
-        options: ["Computer Style Sheets", "Creative Style Systems", "Cascading Style Sheets", "Complex Style Syntax"],
+        question: "What does the acronym CSS stand for??", options: ["Computer Style Sheets", "Creative Style Systems", "Cascading Style Sheets", "Complex Style Syntax"],
         answer: "Cascading Style Sheets"
     },
 
@@ -49,7 +48,7 @@ const questions = [
     },
 
     {
-        question: "What color is a banana?", options: ["Red", "Yellow", "Blue", "Green"], answer: "Yellow"
+        question: "What is String in Programming?", options: ["A data type used to represent text", "", "Blue", "Green"], answer: "Yellow"
     },
 
     {
@@ -78,9 +77,8 @@ let score = 0;
 let selectedAnswer = "";
 let answered = false;
 //Variables de errores
+let virusPosition = 20;
 let mistakes = 0;
-let virusPosition = 0;
-const maxMistakes = 15;
 
 //Sonidos para respuesras malas y correctas
 const correctSound =
@@ -226,9 +224,9 @@ function nextQuestion() {
         return;
     }
 
-    if (selectedAnswer === questions[currentQuestion].answer) {
-        score++;
-    }
+    ///if (selectedAnswer === questions[currentQuestion].answer) {
+       /// score++;
+
 
     selectedAnswer = "";
 
@@ -248,15 +246,14 @@ function moveVirus(){
 
     mistakes++;
 
-    virusPosition += 200;
+    virusPosition += 40;
 
-    document.getElementById("virus").style.transform =
-        `translateX(-${virusPosition}px)`;
+    document.getElementById(
+        "virus"
+    ).style.left =
+        (20 - virusPosition) + "px";
 
-    console.log("Mistakes:", mistakes);
-    console.log("Virus Position:", virusPosition);
-
-    if(mistakes >= maxMistakes){
+    if(mistakes >= 5){
 
         showVirusGameOver();
 
