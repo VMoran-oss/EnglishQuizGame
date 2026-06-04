@@ -100,11 +100,25 @@ function showInstructions() {
 //Iniciar el Quiz
 function startQuiz() {
 
+    currentQuestion = 0;
+    score = 0;
+    mistakes = 0;
+    virusPosition = 20;
+    answered = false;
+    selectedAnswer = "";
+
+    // Oculta el confeti si estaba activo de la partida anterior
+    document.getElementById("victory-assets").classList.add("hidden");
+
+    // Resetea visualmente la posición del virus en la pantalla
+    document.getElementById("virus").style.left = "auto";
+    document.getElementById("virus").style.right = "20px";
+
+    // Tu código original que ya tenías
     document.getElementById("instructions-screen").style.display = "none";
-
     document.getElementById("quiz-screen").style.display = "block";
-
     showQuestion();
+
 
 }
 
@@ -262,6 +276,7 @@ function moveVirus(){
 //Pantalla final del juego
 function showResult() {
 
+
     document.getElementById("quiz-screen").style.display = "none";
 
     document.getElementById("result-screen").style.display = "block";
@@ -270,22 +285,26 @@ function showResult() {
 
     let msg = "";
 
-    if (score >= 13) {
-
-        msg = "Excellent!";
-
-    } else if (score >= 8) {
-
-        msg = "Good Job!";
-
+    if (score === 15) {
+        msg = "Excellent! SYSTEM SECURED 🛡️";
+        // Muestra el confeti removiendo la clase 'hidden'
+        document.getElementById("victory-assets").classList.remove("hidden");
     } else {
+        // Si no hizo 15, nos aseguramos de que el confeti se mantenga oculto
+        document.getElementById("victory-assets").classList.add("hidden");
 
-        msg = "Keep Practicing!";
-
+        if (score >= 13) {
+            msg = "Excellent!";
+        } else if (score >= 8) {
+            msg = "Good Job!";
+        } else {
+            msg = "Keep Practicing!";
+        }
     }
 
     document.getElementById("message").innerHTML = msg;
 
+    document.querySelector('.trophy').classList.remove('ocultar-copa');
 }
 
 //Función del GameOver para el juego
@@ -311,4 +330,6 @@ function showVirusGameOver(){
         "message"
     ).innerHTML =
         "The virus reached the programmer!";
+
+    document.querySelector('.trophy').classList.add('ocultar-copa');
 }

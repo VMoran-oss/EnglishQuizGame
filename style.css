@@ -14,7 +14,7 @@ body {
 .phone {
     width: 90%;
     max-width: 450px; /* Reducido para que parezca más un celular real */
-    min-height: 600px;
+    height: 600px;
     background: #0d0d0d; /* Fondo interno negro profundo */
     border: 2px solid #ff3333; /* Borde rojo de advertencia */
     border-radius: 20px;
@@ -140,8 +140,6 @@ button:hover {
     font-size: 50px;
     transition: all 0.7s ease;
 }
-/* --- EFECTOS DE VICTORIA --- */
-
 /* Por defecto ocultamos los efectos */
 .hidden {
     display: none;
@@ -149,8 +147,9 @@ button:hover {
 
 /* Animación para que la copa flote */
 .trophy {
-    font-size: 80px;
+    font-size: 95px;
     margin-bottom: 10px;
+    margin-top: 140px;
     animation: flotar 2s ease-in-out infinite alternate;
     filter: drop-shadow(0 0 15px #ffcc00); /* Brillo dorado */
 }
@@ -162,10 +161,14 @@ button:hover {
 
 /* --- EL CONFETI --- */
 .confetti-wrapper {
-    position: relative;
-    width: 100%;
-    height: 0;
-    overflow: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
 }
 
 .confetti {
@@ -174,7 +177,9 @@ button:hover {
     height: 12px;
     top: -20px;
     border-radius: 3px;
-    animation: caerConfeti 3s linear infinite;
+    animation: caerConfeti 6s linear infinite;
+    transform: scale(2);
+    box-shadow: 70px 150px #00ff66, -70px 300px #ff3333, 140px 450px #ffcc00;
 }
 
 /* Colores brillantes de los pedacitos de confeti */
@@ -187,11 +192,15 @@ button:hover {
 /* Animación de caída y rotación */
 @keyframes caerConfeti {
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0);
         opacity: 1;
     }
     100% {
-        transform: translateY(300px) rotate(720deg);
+        transform: translateY(105vh);
         opacity: 0;
     }
+
+}
+.ocultar-copa {
+    display: none !important;
 }
