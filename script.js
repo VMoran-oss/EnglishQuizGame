@@ -307,6 +307,29 @@ function showResult() {
     document.querySelector('.trophy').classList.remove('ocultar-copa');
 }
 
+//Función de boton de volver a intentar
+function restartQuiz(){
+
+    currentQuestion = 0;
+    score = 0;
+    selectedAnswer = "";
+    answered = false;
+
+    mistakes = 0;
+    virusPosition = 20;
+
+    document.getElementById("virus").style.left =
+        "20px";
+
+    document.getElementById("result-screen").style.display =
+        "none";
+
+    document.getElementById("quiz-screen").style.display =
+        "block";
+
+    showQuestion();
+
+}
 //Función del GameOver para el juego
 function showVirusGameOver(){
 
