@@ -265,7 +265,7 @@ function moveVirus(){
     ).style.left =
         (20 - virusPosition) + "px";
 
-    if(mistakes >= 5){
+    if(mistakes >= 8){
 
         showVirusGameOver();
 
